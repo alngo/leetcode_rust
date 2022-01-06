@@ -48,6 +48,12 @@ mod tests {
     }
 
     #[test]
+    fn test_three_sum_other_valid() {
+        let nums = vec![-1,0,1,2,-1,-2];
+        assert_eq!(three_sum(nums), vec![vec![-2,0,2],vec![-1,-1,2],vec![-1,0,1]]);
+    }
+
+    #[test]
     fn test_three_sum_empty() {
         let nums = vec![];
         let empty: Vec<Vec<i32>> = vec![];
