@@ -1,3 +1,4 @@
-mod two_sum;
-mod three_sum;
-mod four_sum;
+pub mod two_sum;
+pub mod add_two_numbers;
+pub mod three_sum;
+pub mod four_sum;
