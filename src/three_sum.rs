@@ -11,7 +11,7 @@ pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
         if previous.is_some() && nums[i] == previous.unwrap() {
             continue;
         }
-        previous = Option::from(nums[i]);
+        previous = Some(nums[i]);
 
         let mut j = i + 1;
         let mut k = nums.len() - 1;

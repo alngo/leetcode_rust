@@ -14,14 +14,14 @@ pub fn four_sum(nums: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
             if previous_a.is_some() && nums[a] == previous_a.unwrap() {
                 continue;
             }
-            previous_a = Option::from(nums[a]);
+            previous_a = Some(nums[a]);
 
             let mut previous_b: Option<i32> = None;
             for b in (a + 1)..(lenght - 2) {
                 if previous_b.is_some() && nums[b] == previous_b.unwrap() {
                     continue;
                 }
-                previous_b = Option::from(nums[b]);
+                previous_b = Some(nums[b]);
 
                 let mut c = b + 1;
                 let mut d = lenght - 1;
