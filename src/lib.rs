@@ -5,5 +5,6 @@ pub mod find_median_sorted_arrays;
 pub mod longest_palindrome;
 pub mod zigzag_conversion;
 pub mod reverse_integer;
+pub mod my_atoi;
 pub mod three_sum;
 pub mod four_sum;
