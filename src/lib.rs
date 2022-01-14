@@ -6,5 +6,6 @@ pub mod longest_palindrome;
 pub mod zigzag_conversion;
 pub mod reverse_integer;
 pub mod my_atoi;
+pub mod is_match;
 pub mod three_sum;
 pub mod four_sum;
