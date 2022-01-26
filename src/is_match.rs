@@ -1,23 +1,20 @@
 pub fn is_match(s: String, p: String) -> bool {
-    is_match_slice(s.as_bytes(), p.as_bytes())
-}
+    let p_as_bytes = p.as_bytes();
+    let s_as_bytes = s.as_bytes();
 
-fn is_match_slice(s: &[u8], p: &[u8]) -> bool {
-    match (p, s) {
-        ([x, b'*', _subp @ ..], [y, subs @ ..]) if *x == b'.' || x == y => {
-            is_match_slice(subs, p)
-        }
-        ([_, b'*', subp @ ..], _) => {
-            is_match_slice(s, subp)
-        }
-        ([x, subp @ ..], [y, subs @ ..]) if *x == b'.' || x == y => {
-            is_match_slice(subs, subp)
-        }
-        ([], s) => s.is_empty(),
-        _ => false,
+    if p_as_bytes.len() == 0 {
+        return s_as_bytes.len() == 0;
+    }
+    let fmatch = s.len() != 0 && (p_as_bytes[0] == s_as_bytes[0] || p_as_bytes[0] == b'.');
+
+    if p_as_bytes.len() > 1 && p_as_bytes[1] == b'*' {
+        return is_match(String::from_utf8(s_as_bytes.to_vec()).unwrap(),
+            String::from_utf8(p_as_bytes[2..].to_vec()).unwrap()) ||
+            (fmatch && is_match(String::from_utf8(s_as_bytes[1..].to_vec()).unwrap(), p));
+    } else {
+        return fmatch && is_match(String::from_utf8(s_as_bytes[1..].to_vec()).unwrap(), String::from_utf8(p_as_bytes[1..].to_vec()).unwrap());
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -66,6 +63,16 @@ mod tests {
     #[test]
     fn test_is_match_9() {
         assert_eq!(is_match(String::from("a"), String::from("a*")), true);
+    }
+
+    #[test]
+    fn test_is_match_10() {
+        assert_eq!(is_match(String::from("aaa"), String::from("a*a")), true);
+    }
+
+    #[test]
+    fn test_is_match_11() {
+        assert_eq!(is_match(String::from("aabcbcbcaccbcaabc"), String::from(".*a*aa*.*b*.c*.*a*")), true);
     }
 
 }
